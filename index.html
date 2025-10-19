@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Diamantes FF - Diamantes Express</title>
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --card:#0f1720;
+      --accent1:#4fc3f7;
+      --accent2:#9b59b6;
+      --accent3:#2ecc71;
+      --glass: rgba(255,255,255,0.04);
+      --neon: 0 0 18px rgba(79,195,247,0.12), 0 0 30px rgba(155,89,182,0.06);
+      --text:#e6eef8;
+    }
+    *{box-sizing:border-box;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+    body{
+      margin:0;background:linear-gradient(180deg,var(--bg),#040405 150px);color:var(--text);
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    }
+    .container{max-width:1100px;margin:36px auto;padding:20px;}
+    header{display:flex;gap:16px;align-items:center}
+    .logo{
+      display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:var(--neon);
+    }
+    .logo img{width:56px;height:56px;border-radius:8px;object-fit:cover}
+    .brand{line-height:1}
+    .brand h1{margin:0;font-size:20px;letter-spacing:0.4px}
+    .brand p{margin:0;font-size:12px;color:rgba(230,238,248,0.7)}
+    main{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:20px}
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:18px}
+    .hero{display:flex;gap:16px;align-items:center}
+    .hero .img{width:120px;height:80px;border-radius:8px;overflow:hidden}
+    .hero img{width:100%;height:100%;object-fit:cover}
+    .description{flex:1}
+    .description h2{margin:0 0 6px 0}
+    .tags{display:flex;gap:8px;margin-top:8px}
+    .tag{padding:6px 8px;border-radius:999px;background:var(--glass);font-size:12px;color:rgba(230,238,248,0.9)}
+    .selector{margin-top:18px;display:flex;flex-direction:column;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#04111a;font-weight:700;cursor:pointer;box-shadow:var(--neon)
+    }
+    .btn.ghost{background:transparent;color:var(--accent1);border:1px solid rgba(255,255,255,0.06)}
+    .options-list{display:none;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:10px;margin-top:6px}
+    .option{padding:10px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+    .option:hover{border-color:rgba(255,255,255,0.04);background:rgba(255,255,255,0.01)}
+    .price-display{margin-top:8px;font-size:20px}
+    .price-display .price{color:var(--accent3);font-weight:800;font-size:22px}
+    .specs{margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px}
+    aside{display:flex;flex-direction:column;gap:12px}
+    .trust{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(15,23,32,0.6), rgba(10,12,15,0.6));border:1px solid rgba(255,255,255,0.03)}
+    .payments{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;}
+    .paylogo{display:flex;gap:8px;align-items:center;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)}
+    .paylogo img{height:28px}
+    footer{margin-top:18px;padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+    .whatsapp{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:#25D366;color:#052014;font-weight:700;text-decoration:none;box-shadow:0 6px 18px rgba(37,211,102,0.12);border:0
+    }
+    .whatsapp svg{width:20px;height:20px}
+    .warning{
+      background:rgba(255,255,255,0.02);
+      border-left:4px solid var(--accent1);
+      padding:10px;
+      border-radius:8px;
+      font-size:13px;
+      color:rgba(230,238,248,0.8);
+      margin-top:10px;
+    }
+    input[type="text"]{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.02);
+      color:var(--text);
+    }
+    .game-info, .socials, .how-to-buy{
+      margin-top:16px;
+      padding:12px;
+      border-radius:10px;
+      background:rgba(255,255,255,0.02);
+      color:rgba(230,238,248,0.9);
+      font-size:13px;
+    }
+    .socials a{
+      display:inline-block;
+      margin-right:10px;
+      color:white;
+      text-decoration:none;
+      font-weight:600;
+    }
+    @media(max-width:900px){
+      main{grid-template-columns:1fr;}
+      aside{order:2}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <img src="https://img.utdstc.com/icon/dc5/e10/dc5e10ab8ed911c85932de97bb6bdc97b3d009c57b888948ceb3548051132d18:200" alt="logo">
+        <div class="brand">
+          <h1>Diamantes Express</h1>
+          <p>Compra segura · Entrega rápida · Soporte por WhatsApp</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="hero">
+          <div class="img"><img src="https://news24online.com/wp-content/uploads/2025/01/Free-fire-max.jpg" alt="diamante"></div>
+          <div class="description">
+            <h2>Recarga Free Fire - Catálogo</h2>
+            <div class="tags">
+              <div class="tag">Moneda: LPS</div>
+              <div class="tag">Entrega por código</div>
+              <div class="tag">Pago: BAC / Binance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="selector">
+          <label style="font-weight:700;margin-top:8px">Proceso de selección</label>
+
+          <button id="openOptions" class="btn">Elige una opción ▾</button>
+          <div id="optionsList" class="options-list"></div>
+
+          <div class="price-display" id="priceArea" style="display:none">
+            Precio seleccionado: <span class="price" id="priceText">LPS 0</span>
+          </div>
+
+          <div style="display:flex;gap:8px">
+            <button id="btnComprar" class="btn ghost" disabled>Comprar</button>
+            <a id="whatsappQuick" class="whatsapp" href="#" style="display:none" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0012 1C6 1 1.3 5.8 1.3 11.9c0 2.1.6 4.1 1.7 5.8L1 23l5.6-1.6c1.6 1 3.4 1.5 5.4 1.5 6 0 10.7-4.8 10.7-10.9 0-3-1.2-5.9-3.2-8zM12 21.5c-1.7 0-3.3-.5-4.7-1.4l-.3-.2-3.3.9.9-3.1-.2-.3A8.8 8.8 0 013.2 12 9 9 0 0112 3.1c4.9 0 8.9 4 8.9 8.9S16.9 21.5 12 21.5z"></path></svg>
+              Contacto rápido
+            </a>
+          </div>
+
+          <div id="specsBox" class="specs" style="display:none">
+            <strong>Especificaciones del pedido</strong>
+            <div id="specsContent" style="margin-top:8px">---</div>
+            
+            <label for="username" style="display:block;margin-top:10px;font-weight:600;">Nombre de usuario de Free Fire:</label>
+            <input type="text" id="usernameInput" placeholder="Ejemplo: Lockdown!" />
+
+            <label for="userId" style="display:block;margin-top:10px;font-weight:600;">Id de usuario de Free Fire:</label>
+            <input type="text" id="userId" placeholder="Ejemplo: 222838093" />
+
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button id="realizarPedido" class="btn" style="background:linear-gradient(90deg,var(--accent3),#2dd36f)">Realizar el pedido</button>
+              <button id="cancelar" class="btn ghost">Cancelar</button>
+            </div>
+
+            <div class="warning">
+              ⚠️ El pedido se enviará únicamente después de finalizar el pago y confirmar la transferencia por WhatsApp.
+            </div>
+          </div>
+
+          <!-- Bloque de información y redes sociales -->
+          <div class="game-info">
+                        <div>Gracias por confiar en <strong>Diamantes Express</strong>. Tu apoyo nos motiva a seguir ofreciendo el mejor servicio.</div>
+            <p><strong>¡Gracias por elegirnos!</strong> Compra ahora y ahorra más en tus recargas de Free Fire. Mantente al día con las novedades del juego y disfruta de tus diamantes y recompensas exclusivas.</p>
+                        <div>Free Fire es uno de los juegos de batalla más populares del mundo, con millones de jugadores disfrutando de su acción rápida, eventos emocionantes y contenido exclusivo cada semana.</div>
+          </div>
+
+          <div class="how-to-buy">
+            <h4>Cómo comprar paso a paso:</h4>
+            <ol style="margin-left:18px">
+              <li>Selecciona la cantidad de diamantes que deseas.</li>
+              <li>Haz clic en "Comprar" y completa tus datos.</li>
+              <li>Confirma el pago a través de tu método preferido.</li>
+              <li>Recibe tu recarga por código en minutos.</li>
+            </ol>
+          </div>
+
+          <div class="socials">
+            <!-- Comentario: reemplaza los links por tus redes reales -->
+            <a href="#" target="_blank">TikTok</a>
+            <a href="#" target="_blank">YouTube</a>
+            <a href="#" target="_blank">Instagram</a>
+          </div>
+
+        </div>
+      </section>
+
+      <aside>
+        <div class="trust panel">
+          <h3>¿Por qué comprar con nosotros?</h3>
+          <ul style="margin-top:10px;padding-left:18px">
+            <li>✅ Sitio seguro y confiable.</li>
+            <li>✅ Entrega rápida y garantizada.</li>
+            <li>✅ Los mejores precios y bonos.</li>
+            <li>✅ Soporte directo por WhatsApp.</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h4>Métodos de pago</h4>
+          <div class="payments">
+            <div class="paylogo"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='32'><rect rx='6' width='120' height='32' fill='%23002b5c'/><text x='10' y='21' fill='white' font-family='Arial' font-size='12'>BAC Credomatic</text></svg>" alt="BAC Credomatic"></div>
+            <div class="paylogo"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='32'><rect rx='6' width='120' height='32' fill='%23f3ba2f'/><text x='10' y='21' fill='black' font-family='Arial' font-size='12'>Binance</text></svg>" alt="Binance"></div>
+          </div>
+
+<!-- Imagen adicional centrada y tamaño moderado -->
+<div style="display:flex; justify-content:center; margin-top:12px;">
+  <img src="https://public.bnbstatic.com/image/cms/blog/20220502/c4ba0f1b-c515-4289-ada3-a99ed6805f8d.png" alt="Tu imagen" style="max-width:100%; width:250px; height:auto; border-radius:8px; object-fit:cover;">
+</div>
+
+
+          <!-- Información adicional sobre métodos de pago -->
+          <p style="margin-top:10px; text-align:center; font-size:13px; color:rgba(230,238,248,0.8);">
+            Aceptamos pagos seguros vía BAC Credomatic y Binance. Próximamente agregaremos más opciones para tu comodidad. Confirma tu método preferido antes de realizar tu pedido.
+          </p>
+        </div>
+
+         <div class="panel">
+          <h4>Soporte y Contacto</h4>
+          <p>Si tienes dudas o deseas confirmar tu pago, contáctanos directamente:</p>
+          <ul style="font-size:13px;color:rgba(230,238,248,0.8);padding-left:18px">
+            <li>📞 <strong>WhatsApp:</strong> +504 8850-5694</li>
+            <li>🕐 <strong>Horario:</strong> Lunes a Domingo - 8:00 AM a 10:00 PM</li>
+            <li>📧 <strong>Email:</strong> soporte@diamantesexpress.com</li>
+          </ul>
+          <p style="margin-top:6px;font-size:13px;color:rgba(230,238,248,0.8);">
+            Nuestro equipo te ayudará con cualquier duda sobre pedidos, pagos o promociones.
+          </p>
+          <a class="whatsapp" href="https://wa.me/50488505694" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.9 11.9 0 0012 1C6 1 1.3 5.8 1.3 11.9c0 2.1.6 4.1 1.7 5.8L1 23l5.6-1.6c1.6 1 3.4 1.5 5.4 1.5 6 0 10.7-4.8 10.7-10.9 0-3-1.2-5.9-3.2-8zM12 21.5c-1.7 0-3.3-.5-4.7-1.4l-.3-.2-3.3.9.9-3.1-.2-.3A8.8 8.8 0 013.2 12 9 9 0 0112 3.1c4.9 0 8.9 4 8.9 8.9S16.9 21.5 12 21.5z"></path></svg>
+            Contactar por WhatsApp
+          </a>
+        </div>
+
+        <footer>
+          <div style="font-size:13px">© <strong>Diamantes Express</strong></div>
+          <div style="font-size:12px;color:rgba(230,238,248,0.6)">Diseño gaming</div>
+        </footer>
+      </aside>
+    </main>
+  </div>
+
+  <script>
+    const packages = [
+      {id:'p1', name:'100 diamantes (+10 bonus)', details:'100 + 10 bonus', priceText:'30 LPS'},
+      {id:'p2', name:'310 diamantes (+31 bonus)', details:'310 + 31 bonus', priceText:'80 LPS'},
+      {id:'p3', name:'520 diamantes (+52 bonus)', details:'520 + 52 bonus', priceText:'120 LPS'},
+      {id:'p4', name:'1060 diamantes (+106 bonus)', details:'1060 + 106 bonus', priceText:'240 LPS'},
+      {id:'p5', name:'2180 diamantes (+218 bonus)', details:'2180 + 218 bonus', priceText:'490 LPS'},
+      {id:'p6', name:'5600 diamantes (+560 bonus)', details:'5600 + 560 bonus', priceText:'1,150 LPS'},
+      {id:'p7', name:'Pase Booyah', details:'Pase Booyah', priceText:'70 LPS'},
+      {id:'p8', name:'Membresía semanal', details:'Membresía semanal', priceText:'50 LPS'},
+      {id:'p9', name:'Membresía mensual', details:'Membresía mensual', priceText:'235 LPS'}
+    ];
+
+    const optionsList = document.getElementById('optionsList');
+    const openOptions = document.getElementById('openOptions');
+    const priceArea = document.getElementById('priceArea');
+    const priceText = document.getElementById('priceText');
+    const btnComprar = document.getElementById('btnComprar');
+    const specsBox = document.getElementById('specsBox');
+    const specsContent = document.getElementById('specsContent');
+    const realizarPedido = document.getElementById('realizarPedido');
+    const cancelar = document.getElementById('cancelar');
+    const whatsappQuick = document.getElementById('whatsappQuick');
+    const usernameInput = document.getElementById('usernameInput');
+    const userIdInput = document.getElementById('userId');
+
+    let selected = null;
+
+    packages.forEach(p=>{
+      const div = document.createElement('div');
+      div.className='option';
+      div.textContent = p.name;
+      div.dataset.id = p.id;
+      div.addEventListener('click',()=>{
+        selectPackage(p.id);
+        optionsList.style.display='none';
+      });
+      optionsList.appendChild(div);
+    });
+
+    openOptions.addEventListener('click',()=>{
+      optionsList.style.display = optionsList.style.display==='block'?'none':'block';
+    });
+
+    function selectPackage(id){
+      const p = packages.find(x=>x.id===id);
+      if(!p) return;
+      selected = p;
+      openOptions.textContent = p.name;
+      priceArea.style.display='block';
+      priceText.textContent = p.priceText;
+      btnComprar.disabled=false;
+    }
+
+    btnComprar.addEventListener('click',()=>{
+      if(!selected) return;
+      specsBox.style.display='block';
+      specsContent.innerHTML = `
+        <ul style="margin:0;padding-left:18px">
+          <li><strong>Producto:</strong> ${selected.name}</li>
+          <li><strong>Detalles:</strong> ${selected.details}</li>
+          <li><strong>Precio:</strong> ${selected.priceText}</li>
+          <li><strong>Fecha:</strong> ${new Date().toLocaleDateString()}</li>
+          <li><strong>Hora:</strong> ${new Date().toLocaleTimeString()}</li>
+        </ul>
+      `;
+    });
+
+    cancelar.addEventListener('click',()=>{
+      specsBox.style.display='none';
+    });
+
+    realizarPedido.addEventListener('click',()=>{
+      if(!selected) return;
+      const username = usernameInput.value.trim();
+      if(!username){alert('Por favor ingresa tu nombre de usuario de Free Fire.');return;}
+      const userId = userIdInput.value.trim();
+      if(!userId){alert('Por favor ingresa tu Id de usuario de Free Fire.');return;}
+      const mensaje = `🧾 *Pedido de Recarga Free Fire*\n\n📦 *Producto:* ${selected.name}\n💎 *Detalles:* ${selected.details}\n💰 *Precio:* ${selected.priceText}\n👤 *Usuario Free Fire:* ${username}\n👤 *Id Free Fire:* ${userId}\n🕓 *Fecha:* ${new Date().toLocaleString()}\n\n✅ Por favor, confirma tu pago para procesar el pedido.`;
+      const url = 'https://wa.me/50488505694?text=' + encodeURIComponent(mensaje);
+      window.open(url,'_blank');
+    });
+  </script>
+</body>
+</html>
